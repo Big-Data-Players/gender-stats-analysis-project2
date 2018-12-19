@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------------------------
+--------------------------------------------HIVE-------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+CREATE DATABASE GNEDER_STAT_DB;
+
+USE GENDER_STAT_DB;
+
+CREATE TABLE (Country Name:varchar(50) ,Country Code:varchar(50) ,Indicator Name:varchar(50) ,
+Indicator Code:varchar(50) , 1960:double, 1961:double, 1962:double, 1963:double, 1964:double, 
+1965:double, 1966:double, 1967:double, 1968:double, 1969:double, 1970:double, 1971:double, 
+1972:double, 1973:double, 1974:double, 1975:double, 1976:double, 1977:double, 1978:double, 
+1979:double, 1980:double, 1981:double, 1982:double, 1983:double, 1984:double, 1985:double, 
+1986:double, 1987:double, 1988:double, 1989:double, 1990:double, 1991:double, 1992:double, 
+1993:double, 1994:double, 1995:double, 1996:double, 1997:double, 1998:double, 1999:double, 
+2000:double, 2001:double, 2002:double, 2003:double, 2004:double, 2005:double, 2006:double, 
+2007:double, 2008:double, 2009:double, 2010:double, 2011:double, 2012:double, 2013:double, 
+2014:double, 2015:double, 2016:double)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+LOAD DATA INTO PATH 'hdfsData/Gender_StatsData.csv' INTO TABLE GENDER_STAT;
+
+
+-------------------------------------------------------------------------------------------------
+--------------------------------------------PIG--------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+data = LOAD 'hdfsData/Gender_StatsData.csv' USING PigStorage(',') AS (CountryName varchar(50),
+CountryCode varchar(50),IndicatorName varchar(50),IndicatorCode varchar(50),`1960` double,
+`1961` double,`1962` double,`1963` double,`1964` double,`1965` double,`1966` double,
+`1967` double,`1968` double,`1969` double,`1970` double,`1971` double,`1972` double,
+`1973` double,`1974` double,`1975` double,`1976` double,`1977` double,`1978` double,
+`1979` double,`1980` double,`1981` double,`1982` double,`1983` double,`1984` double,
+`1985` double,`1986` double,`1987` double,`1988` double,`1989` double,`1990` double,
+`1991` double,`1992` double,`1993` double,`1994` double,`1995` double,`1996` double,
+`1997` double,`1998` double,`1999` double,`2000` double,`2001` double,`2002` double,
+`2003` double,`2004` double,`2005` double,`2006` double,`2007` double,`2008` double,
+`2009` double,`2010` double,`2011` double,`2012` double,`2013` double,`2014` double,
+`2015` double,`2016` double)
