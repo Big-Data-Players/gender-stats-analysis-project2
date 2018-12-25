@@ -2,6 +2,9 @@
 --------------------------------------------HIVE-------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>QUESTION 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
 CREATE DATABASE G	GENDER_STAT_DB;
 
 USE GENDER_STAT_DB;
@@ -22,7 +25,7 @@ SELECT CountryName, IndicatorCode, (SUM(
 +COALESCE(`2013`,CAST(0 AS BIGINT))
 +COALESCE(`2014`,CAST(0 AS BIGINT))
 +COALESCE(`2015`,CAST(0 AS BIGINT))
-+COALESCE(`2016`,CAST(0 AS BIGINT)))/16) AS SumYears
++COALESCE(`2016`,CAST(0 AS BIGINT)))/7) AS SumYears
 FROM Q1_DATA
 GROUP BY CountryName, IndicatorCode;
 
@@ -32,23 +35,53 @@ SELECT CountryName, SumYears
 FROM OUTPUT1_Q1
 WHERE SumYears <> 0 AND SumYears <30;
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>QUESTION 4<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+CREATE TABLE Q4_DATA(CountryName varchar(50), IndicatorCode varchar(50),`2000` double,`2001` double,
+`2002` double,`2003` double,`2004` double,`2005` double,`2006` double,`2007` double,`2008` double,
+`2009` double,`2010` double,`2011` double,`2012` double,`2013` double,`2014` double,`2015` double,
+`2016` double)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|';
+
+LOAD DATA INPATH 'sqoop-question-4/part-m-00000' INTO TABLE Q4_DATA;
+
+CREATE TABLE OUTPUT1_Q4 AS 
+SELECT CountryName, IndicatorCode, 
+(COALESCE(`2001`,CAST(0 AS BIGINT))-COALESCE(`2000`,CAST(0 AS BIGINT))) AS `2001-2000`,
+(COALESCE(`2002`,CAST(0 AS BIGINT))-COALESCE(`2001`,CAST(0 AS BIGINT))) AS `2002-2001`,
+(COALESCE(`2003`,CAST(0 AS BIGINT))-COALESCE(`2002`,CAST(0 AS BIGINT))) AS `2003-2002`,
+(COALESCE(`2004`,CAST(0 AS BIGINT))-COALESCE(`2003`,CAST(0 AS BIGINT))) AS `2004-2003`,
+(COALESCE(`2005`,CAST(0 AS BIGINT))-COALESCE(`2004`,CAST(0 AS BIGINT))) AS `2005-2004`,
+(COALESCE(`2006`,CAST(0 AS BIGINT))-COALESCE(`2005`,CAST(0 AS BIGINT))) AS `2006-2005`,
+(COALESCE(`2007`,CAST(0 AS BIGINT))-COALESCE(`2006`,CAST(0 AS BIGINT))) AS `2007-2006`,
+(COALESCE(`2008`,CAST(0 AS BIGINT))-COALESCE(`2007`,CAST(0 AS BIGINT))) AS `2008-2007`,
+(COALESCE(`2009`,CAST(0 AS BIGINT))-COALESCE(`2008`,CAST(0 AS BIGINT))) AS `2009-2008`,
+(COALESCE(`2010`,CAST(0 AS BIGINT))-COALESCE(`2009`,CAST(0 AS BIGINT))) AS `2010-2009`,
+(COALESCE(`2011`,CAST(0 AS BIGINT))-COALESCE(`2010`,CAST(0 AS BIGINT))) AS `2011-2010`,
+(COALESCE(`2012`,CAST(0 AS BIGINT))-COALESCE(`2011`,CAST(0 AS BIGINT))) AS `2012-2011`,
+(COALESCE(`2013`,CAST(0 AS BIGINT))-COALESCE(`2012`,CAST(0 AS BIGINT))) AS `2013-2012`,
+(COALESCE(`2014`,CAST(0 AS BIGINT))-COALESCE(`2013`,CAST(0 AS BIGINT))) AS `2014-2013`,
+(COALESCE(`2015`,CAST(0 AS BIGINT))-COALESCE(`2014`,CAST(0 AS BIGINT))) AS `2015-2014`,
+(COALESCE(`2016`,CAST(0 AS BIGINT))-COALESCE(`2015`,CAST(0 AS BIGINT))) AS `2016-2015`
+FROM Q4_DATA;
+
+
+CREATE TABLE FINAL_OUTPUT_Q4 AS 
+SELECT CountryName,`2001-2000`,`2002-2001`,`2003-2002`,`2004-2003`,`2005-2004`,`2006-2005`,
+`2007-2006`,`2008-2007`,`2009-2008`,`2010-2009`,`2011-2010`,`2012-2011`,`2013-2012`,
+`2014-2013`,`2015-2014`,`2016-2015`
+FROM OUTPUT1_Q4
+WHERE `2001-2000`<>0 AND `2002-2001`<>0 AND `2003-2002`<>0 AND `2004-2003`<>0 
+AND `2005-2004`<>0 AND `2006-2005`<>0 AND `2007-2006`<>0 AND `2008-2007`<>0 
+AND `2009-2008`<>0 AND `2010-2009`<>0 AND `2011-2010`<>0 AND `2012-2011`<>0 
+AND `2013-2012`<>0 AND `2014-2013`<>0 AND `2015-2014`<>0 AND `2016-2015`<>0;
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------PIG--------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-data = LOAD 'hdfsData/Gender_StatsData.csv' USING PigStorage(',') AS (CountryName varchar(50),
-CountryCode varchar(50),IndicatorName varchar(50),IndicatorCode varchar(50),`1960` double,
-`1961` double,`1962` double,`1963` double,`1964` double,`1965` double,`1966` double,
-`1967` double,`1968` double,`1969` double,`1970` double,`1971` double,`1972` double,
-`1973` double,`1974` double,`1975` double,`1976` double,`1977` double,`1978` double,
-`1979` double,`1980` double,`1981` double,`1982` double,`1983` double,`1984` double,
-`1985` double,`1986` double,`1987` double,`1988` double,`1989` double,`1990` double,
-`1991` double,`1992` double,`1993` double,`1994` double,`1995` double,`1996` double,
-`1997` double,`1998` double,`1999` double,`2000` double,`2001` double,`2002` double,
-`2003` double,`2004` double,`2005` double,`2006` double,`2007` double,`2008` double,
-`2009` double,`2010` double,`2011` double,`2012` double,`2013` double,`2014` double,
-`2015` double,`2016` double)
+data = LOAD 'sqoop-question-1p' USING PigStorage('|') AS(CountryName:chararray, `2000`:double,`2001`:double,`2002`:double`,`2003`:double,`2004`:double,`2005`:double,`2006`:double,`2007`:double,`2008`:double,`2009`:double,`2010`:double,`2011`:double,`2012`:double,`2013`:double,`2014`:double,`2015`:double,`2016`:double);
 
 
 -------------------------------------------------------------------------------------------------
@@ -83,8 +116,87 @@ IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 
 -----------------------------------------VIEW----------------------------------------------------
 
+QUESTION #1
+
 CREATE VIEW question_1_hive AS
 SELECT CountryName, IndicatorCode, `2010`, `2011`, `2012`, `2013`, `2014`, `2015`, `2016`
 FROM gender_data
 WHERE IndicatorCode = 'SE.TER.CMPL.FE.ZS';
+
+QUESTION #4
+
+CREATE VIEW question_4_hive AS
+SELECT CountryName, IndicatorCode, `2000`, `2001`, `2002`, `2003`, `2004`, `2005`, `2006`, `2007`,
+`2008`, `2009`, `2010`, `2011`, `2012`, `2013`, `2014`, `2015`, `2016`
+FROM gender_data
+WHERE IndicatorCode = 'SL.EMP.SELF.FE.ZS';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+data = LOAD 'output/project2/female_grads_view' USING PigStorage('|')  
+AS(CountryName:chararray,CountryCode:chararray,IndicatorName:chararray,IndicatorCode:chararray,y1960:float,
+y1961: float,y1962: float,y1963: float,y1964: float,y1965: float,y1966: float,y1967: float,y1968: float,y1969: float,
+y1970: float,y1971: float,y1972: float,y1973: float,y1974: float,y1975: float,y1976: float,y1977: float,y1978: float,
+y1979: float,y1980: float,y1981: float,y1982: float,y1983: float,y1984: float,y1985: float,y1986: float,y1987: float,
+y1988: float,y1989: float,y1990: float,y1991: float,y1992: float,y1993: float,y1994: float,y1995: float,y1996: float,
+y1997: float,y1998: float,y1999: float,y2000: float,y2001: float,y2002: float,y2003: float,y2004: float,y2005: float,
+y2006: float,y2007: float,y2008: float,y2009: float,y2010: float,y2011: float,y2012: float,y2013: float,y2014: float,
+y2015: float,y2016: float);
+
+data_limit_No_Null = foreach data generate CountryName,($55 is not null?($55,1) : (0.0F,0)),
+($56 is not null?($56,1): (0.0F,0)),($57 is not null?($57,1):(0.0F,0)),($58 is not null?($58,1):(0.0F,0)),
+($59 is not null?($59,1):(0.0F,0)),($60 is not null?($60,1):(0.0F,0));
+
+key_value_data = foreach data_limit_No_Null generate CountryName,$1.($0)+$2.($0)+$3.($0)+$4.($0)+$5.($0)+$6.($0),$1.($1)+$2.($1)+$3.($1)+$4.($1)+$5.($1)+$6.($1);
+
+avg_data = foreach  key_value_data generate $0,($2 != 0?$1/$2:0) AS average;
+
+filter_remove = FILTER avg_data BY average != 0.0;
+
+final_answer = FILTER filter_remove BY average<30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
