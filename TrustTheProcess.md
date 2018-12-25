@@ -33,7 +33,7 @@ create or replace view femaleGrads_all_cols as
 ```
 sqoop import --connect jdbc:mysql://localhost/gender_stat_db --username root --password cloudera --table femaleGrads_all_cols --target-dir Hdata/GenderData/GenderData_FemaleGrads_View -m 1 --fields-terminated-by '|';
 ```
-# 5. Store Output/Result back to (Ingest View with PIG)
+# 5. Store Output/Result back to (PIG)
 
 ## Create a new script
 1. Create new pig script `touch femaleGrads.pig`
