@@ -86,8 +86,6 @@ clean_null_averages = FILTER averages BY ($1 IS NOT NULL);
 STORE final_answer into 'hbase://question1_pig' USING org.apache.pig.backend.hadoop.hbase.HBaseStorage('info:countryName info:average');
 ```
 
-
-
 # Extra Commands Used 
 
 ## Alter Column Type

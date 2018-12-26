@@ -1,3 +1,3 @@
-# practice-git
-For the purpose to practice github workflow
+# How to Run the program
+
 # Notes
