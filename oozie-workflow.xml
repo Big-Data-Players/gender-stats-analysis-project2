@@ -1,7 +1,8 @@
 <workflow-app name="oozie-lab" xmlns="uri:oozie:workflow:0.4">
     <!-- Start job control node -->
-    <start to="hive-create" />
+    <start to="hive-create" /
     
+     
     <!-- Hive table creation -->
     <action name="hive-create">
         <hive xmlns="uri:oozie:hive-action:0.4">
@@ -18,6 +19,8 @@
         <ok to="hive-load" />
         <error to="kill" />
     </action>
+
+    
 
     <!-- Hive table load -->
     <action name="hive-load">

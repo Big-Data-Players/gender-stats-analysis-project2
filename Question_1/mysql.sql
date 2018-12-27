@@ -11,9 +11,14 @@ IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 `2009` varchar(100),`2010` varchar(100),`2011` varchar(100),`2012` varchar(100),`2013` varchar(100),`2014` varchar(100),
 `2015` varchar(100),`2016` varchar(100));
 
------------------------------------------VIEW----------------------------------------------------
+-- VIEWS for Hive and Pig (respoectively)
 
 CREATE VIEW question_1_hive AS
 SELECT CountryName, IndicatorCode, `2010`, `2011`, `2012`, `2013`, `2014`, `2015`, `2016`
 FROM gender_data
 WHERE IndicatorCode = 'SE.TER.CMPL.FE.ZS';
+
+
+CREATE OR REPLACE VIEW femaleGrads_all_cols AS
+    SELECT * FROM gender_data
+    WHERE IndicatorCode = "SE.TER.CMPL.FE.ZS";
