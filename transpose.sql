@@ -20,7 +20,8 @@
 --!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-CREATE TABLE GENDER_STAT_DB.TRANSPOSE_DATA (CountryName varchar(50), IndicatorCode varchar(30), YearsByCountry INTEGER, DATA decimal(30,30) );
+CREATE TABLE GENDER_STAT_DB.TRANSPOSE_DATA (CountryName varchar(50), IndicatorCode varchar(30), 
+YearsByCountry INTEGER, DATA FLOAT );
 
 DELIMITER $$
 CREATE PROCEDURE GENDER_STAT_DB.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
