@@ -1,4 +1,3 @@
-
 data = LOAD 'sqoop-import-project2' USING PigStorage('|')  AS
 (CountryName:chararray,CountryCode:chararray,IndicatorName:chararray,IndicatorCode:chararray,
 y2010: float,y2011: float,y2012: float,y2013: float,y2014: float,y2015: float,y2016: float);

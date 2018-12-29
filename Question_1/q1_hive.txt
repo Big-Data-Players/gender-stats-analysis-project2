@@ -22,7 +22,6 @@ SELECT CountryName, IndicatorCode, (SUM(
 FROM Q1_DATA
 GROUP BY CountryName, IndicatorCode;
 
-
 CREATE TABLE FINAL_OUTPUT_Q1 AS 
 SELECT CountryName, SumYears
 FROM OUTPUT1_Q1
