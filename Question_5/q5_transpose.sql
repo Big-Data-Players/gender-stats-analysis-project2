@@ -7,10 +7,10 @@
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 
-CREATE OR REPLACE TABLE GENDER_STAT_DB.TRANSPOSE_DATA (CountryName varchar(50), IndicatorCode varchar(30), YearsByCountry INTEGER, DATA decimal(30,30) );
+CREATE OR REPLACE TABLE gender_stat_db.TRANSPOSE_DATA (CountryName varchar(50), IndicatorCode varchar(30), YearsByCountry INTEGER, DATA float(30,30) );
 
 DELIMITER $$
-CREATE PROCEDURE GENDER_STAT_DB.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
+CREATE PROCEDURE gender_stat_db.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
 BEGIN
 
 DECLARE YEAR INTEGER;
@@ -22,9 +22,9 @@ DO
 
 SET @COLNAME = CONCAT('`',YEAR,'`');
 SET @STATEMENT = CONCAT(
-    'INSERT INTO GENDER_STAT_DB.TRANSPOSE_DATA (CountryName, IndicatorCode, YearsByCountry, Data)',
+    'INSERT INTO gender_stat_db.TRANSPOSE_DATA (CountryName, IndicatorCode, YearsByCountry, Data)',
     ' SELECT CountryName, IndicatorCode, ', YEAR,',', @COLNAME,
-    ' FROM GENDER_STAT_DB.gender_data',
+    ' FROM gender_stat_db.gender_data',
     ' WHERE ', @COLNAME,
     ' IS NOT NULL'
 );
@@ -38,4 +38,4 @@ END WHILE;
 END$$
 DELIMITER ;
 
-CALL GENDER_STAT_DB.TRANSPOSE(2010,2016);
+CALL gender_stat_db.TRANSPOSE(2010,2016);
