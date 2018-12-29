@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -7,7 +8,8 @@
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 
-CREATE OR REPLACE TABLE gender_stat_db.TRANSPOSE_DATA (CountryName varchar(50), IndicatorCode varchar(30), YearsByCountry INTEGER, DATA float(30,30) );
+CREATE TABLE transpose_data(CountryName varchar(50), IndicatorCode varchar(30), 
+YearsByCountry INTEGER, Data FLOAT );
 
 DELIMITER $$
 CREATE PROCEDURE gender_stat_db.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
@@ -22,7 +24,7 @@ DO
 
 SET @COLNAME = CONCAT('`',YEAR,'`');
 SET @STATEMENT = CONCAT(
-    'INSERT INTO gender_stat_db.TRANSPOSE_DATA (CountryName, IndicatorCode, YearsByCountry, Data)',
+    'INSERT INTO gender_stat_db.transpose_data (CountryName, IndicatorCode, YearsByCountry, Data)',
     ' SELECT CountryName, IndicatorCode, ', YEAR,',', @COLNAME,
     ' FROM gender_stat_db.gender_data',
     ' WHERE ', @COLNAME,
