@@ -1,3 +1,4 @@
+-- Create Table with all data
 create table gender_data(CountryName varchar(50),CountryCode varchar(20),
 IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 `1961` varchar(100),`1962` varchar(100),`1963` varchar(100),`1964` varchar(100),`1965` varchar(100),`1966` varchar(100),
@@ -11,9 +12,8 @@ IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 `2009` varchar(100),`2010` varchar(100),`2011` varchar(100),`2012` varchar(100),`2013` varchar(100),`2014` varchar(100),
 `2015` varchar(100),`2016` varchar(100));
 
--- Create View
--- `2000
--- `,`2001`,`2003`,`2004`,`2005`,`2006`,`2007`,`2009`
-CREATE OR REPLACE VIEW question_5_hive AS
-SELECT CountryName, IndicatorName,`2000`,`2001`,`2003`,`2004`,`2005`,`2006`,`2007`,`2009`,`2010`, `2011`, `2012`, `2013`, `2014`, `2015`,`2016` FROM gender_data
-WHERE IndicatorCode = 'SE.TER.CMPL.MA.ZS' AND CountryName = 'United States';
+-- Create View form transposed data table
+-- `2010`, `2011`, `2012`, `2013`, `2014`, `2015`,`2016`
+CREATE OR REPLACE VIEW q5_transpose_view AS
+select * from transpose_data where CountryName = "Philippines" AND 
+IndicatorName="Labor force, female (% of total labor force)";

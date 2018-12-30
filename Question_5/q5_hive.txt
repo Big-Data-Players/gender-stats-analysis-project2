@@ -1,5 +1,5 @@
-CREATE TABLE Q5_DATA(CountryName varchar(50), IndicatorCode varchar(50),
-`2010` double,`2011` double,`2012` double,`2013` double,`2014` double,
+CREATE TABLE Q5_DATA(CountryName varchar(50), IndicatorName varchar(200),
+,
 `2015` double,`2016` double)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|';
