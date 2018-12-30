@@ -4,11 +4,10 @@ Gender Statistics Analysis using Hadoop tools: Sqoop, Hive, Pig, Hbase, MapReduc
 
 # Business Requirements
 1. What is the average increase of females who graduated, from the year 2010 - 2016?
-
-5. What is the increase of Labor force, female in the Philippines, from the year 2000 - 2016?
-
-<!-- Indicator Name: Labor force, female (% of total labor force)
-     Indicator Code: SL.TLF.TOTL.FE.ZS -->
+2. List the average increase in fmale education in the U.S. from teh year 2000.
+3. List the % change of male emplyment from the year 2000.
+4. List the % change of female emplyment from the year 2000.
+5. What is the average % of female Labor force in the Philippines, from the year 2000 - 2016?
 
 
 
