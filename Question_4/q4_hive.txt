@@ -1,0 +1,15 @@
+
+CREATE TABLE Q4_DATA(CountryName varchar(50), IndicatorCode varchar(50),
+YearsByCountry int, Data float)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|';
+
+LOAD DATA INPATH 'sqoop-question-4/part-m-00000' INTO TABLE Q4_DATA;
+
+CREATE TABLE FINAL_OUTPUT_Q4 AS
+SELECT t1.CountryName, t1.YearsByCountry as fromYear, t2.YearsByCountry as toYear,
+(t2.Data - t1.Data) AS changePercentage
+FROM Q4_DATA t1
+INNER JOIN Q4_DATA t2
+ON t2.CountryName = t1.CountryName AND t2.YearsByCountry = t1.YearsByCountry + 1
+ORDER BY CountryName, fromYear;

@@ -1,0 +1,4 @@
+
+sqoop import --connect jdbc:mysql://localhost/GENDER_STAT_DB --username DICK --password pussy 
+--table question_4_hive --fields-terminated-by '|' --target-dir sqoop-question-4 -m 1;
+
