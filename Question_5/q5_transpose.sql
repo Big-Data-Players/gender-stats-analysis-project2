@@ -8,7 +8,7 @@
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 
-CREATE TABLE transpose_data(CountryName varchar(50), IndicatorCode varchar(30), 
+CREATE TABLE transpose_data(CountryName varchar(50), IndicatorName varchar(250), 
 YearsByCountry INTEGER, Data FLOAT );
 
 DELIMITER $$
@@ -24,8 +24,8 @@ DO
 
 SET @COLNAME = CONCAT('`',YEAR,'`');
 SET @STATEMENT = CONCAT(
-    'INSERT INTO gender_stat_db.transpose_data (CountryName, IndicatorCode, YearsByCountry, Data)',
-    ' SELECT CountryName, IndicatorCode, ', YEAR,',', @COLNAME,
+    'INSERT INTO gender_stat_db.transpose_data (CountryName, IndicatorName, YearsByCountry, Data)',
+    ' SELECT CountryName, IndicatorName, ', YEAR,',', @COLNAME,
     ' FROM gender_stat_db.gender_data',
     ' WHERE ', @COLNAME,
     ' IS NOT NULL'
