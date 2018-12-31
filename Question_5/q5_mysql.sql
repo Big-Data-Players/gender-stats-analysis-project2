@@ -15,5 +15,5 @@ IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 -- Create View form transposed data table
 -- `2010`, `2011`, `2012`, `2013`, `2014`, `2015`,`2016`
 CREATE OR REPLACE VIEW q5_transpose_view AS
-select * from transpose_data where CountryName = "Philippines" AND 
+select * from transpose_data where (CountryName = "Philippines" OR CountryName = "United States") AND
 IndicatorName="Labor force, female (% of total labor force)";
