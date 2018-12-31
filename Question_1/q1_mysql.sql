@@ -11,12 +11,12 @@ IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 `2009` varchar(100),`2010` varchar(100),`2011` varchar(100),`2012` varchar(100),`2013` varchar(100),`2014` varchar(100),
 `2015` varchar(100),`2016` varchar(100));
 
---TRANSPOSE THE TABLE FOR EASIER READING AND ACCESING
+--TRANSPOSE_Q1 THE TABLE FOR EASIER READING AND ACCESING
 
-CREATE TABLE GENDER_STAT_DB.TRANSPOSE_DATA (CountryName varchar(50), IndicatorCode varchar(30), YearsByCountry INTEGER, Data FLOAT );
+CREATE TABLE PROJECT2.transpose_data_q1(CountryName varchar(50), IndicatorCode varchar(30), YearsByCountry INTEGER, Data FLOAT );
 
 DELIMITER $$
-CREATE PROCEDURE GENDER_STAT_DB.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
+CREATE PROCEDURE PROJECT2.TRANSPOSE_Q1(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
 BEGIN
 
 DECLARE YEAR INTEGER;
@@ -28,9 +28,9 @@ DO
 
 SET @COLNAME = CONCAT('`',YEAR,'`');
 SET @STATEMENT = CONCAT(
-    'INSERT INTO GENDER_STAT_DB.TRANSPOSE_DATA (CountryName, IndicatorCode, YearsByCountry, Data)',
+    'INSERT INTO PROJECT2.transpose_data_q1(CountryName, IndicatorCode, YearsByCountry, Data)',
     ' SELECT CountryName, IndicatorCode, ', YEAR,',', @COLNAME,
-    ' FROM GENDER_STAT_DB.gender_data',
+    ' FROM PROJECT2.gender_data2',
     ' WHERE ', @COLNAME,
     ' IS NOT NULL'
 );
@@ -44,11 +44,11 @@ END WHILE;
 END$$
 DELIMITER ;
 
-CALL GENDER_STAT_DB.TRANSPOSE(2010,2016);
+CALL PROJECT2.TRANSPOSE_Q1(2010,2016);
 
 -- VIEWS for Hive and Pig (respectively)
 
 CREATE VIEW question_1_hive AS
 SELECT CountryName, IndicatorCode, YearsByCountry, Data
-FROM TRANSPOSE_DATA
+FROM transpose_data_q1
 WHERE IndicatorCode = 'SE.TER.CMPL.FE.ZS';
