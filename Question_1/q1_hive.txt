@@ -9,7 +9,7 @@ YearsByCountry int, Data double)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|';
 
-LOAD DATA INPATH 'sqoop-question-1/part-m-00000' INTO TABLE Q1_DATA;
+LOAD DATA INPATH 'project2-sqoop-q1/part-m-00000' INTO TABLE Q1_DATA;
 
 CREATE TABLE FINAL_OUTPUT_Q1 AS 
 SELECT CountryName, (AVG(Data)) AS Average

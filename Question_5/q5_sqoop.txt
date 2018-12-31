@@ -1,4 +1,4 @@
 sqoop export --connect jdbc:mysql://localhost/LData/Project2/Q5  --username root --password cloudera 
 --table gender_data  --export-dir LData/Project2/Q5 -m 1 --enclosed-by '\"';
 
-sqoop import --connect jdbc:mysql://localhost/gender_stat_db --table q5_transpose_view --username root --password cloudera --fields-terminated-by '|' --target-dir HData/q5_sqoop_view -m 1
+sqoop import --connect jdbc:mysql://localhost/PROJECT2 --table q5_transpose_view --username root --password cloudera --fields-terminated-by '|' --target-dir q5_sqoop_view -m 1
