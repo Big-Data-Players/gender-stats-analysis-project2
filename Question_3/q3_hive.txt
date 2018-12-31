@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS GENDER_STAT_DB;
+
+USE GENDER_STAT_DB;
+
+DROP TABLE IF EXISTS Q3_DATA;
+
+CREATE TABLE IF NOT EXISTS Q3_DATA(CountryName varchar(50), IndicatorCode varchar(50),
+YearsByCountry int, Data double)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|';
+
+LOAD DATA INPATH 'Q3_MALE_EMP/part-m-00000' INTO TABLE Q3_DATA;
+
+CREATE TABLE FINAL_OUTPUT_Q3 AS
+SELECT t1.CountryName, t1.YearsByCountry as fromYear, t2.YearsByCountry as toYear,
+(t2.Data - t1.Data) AS changePercentage
+FROM Q3_DATA t1
+INNER JOIN Q3_DATA t2
+ON t2.CountryName = t1.CountryName AND t2.YearsByCountry = t1.YearsByCountry + 1
+ORDER BY CountryName, fromYear;
