@@ -12,5 +12,11 @@ IndicatorCode varchar(30),`1960` varchar(100), `1961` varchar(100),`1962` varcha
 `2009` varchar(100),`2010` varchar(100),`2011` varchar(100),`2012` varchar(100),`2013` varchar(100),
 `2014` varchar(100),`2015` varchar(100),`2016` varchar(100));
 
+CREATE VIEW question_2_hive AS SELECT * FROM gender_data2 WHERE IndicatorCode = 'SE.TER.CMPL.FE.ZS' and CountryCode = 'USA';
+
+
+
+
+
 
 
