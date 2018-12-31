@@ -3,5 +3,4 @@ sqoop export --connect jdbc:mysql://localhost/PROJECT2 --username root --passwor
 --table gender_data --export-dir Hdata/GenderData -m 1 --enclosed-by '\"';
 
 
-sqoop import --connect jdbc:mysql://localhost/GENDER_STAT_DB --username root --password cloudera
---table question_1_hive --fields-terminated-by '|' --target-dir sqoop-question-1/ -m 1
+sqoop import --connect jdbc:mysql://localhost/PROJECT2 --username root --password cloudera --table question_1_hive --fields-terminated-by '|' --target-dir project2-sqoop-q1/ -m 1
