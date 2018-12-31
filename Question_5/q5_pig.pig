@@ -13,5 +13,3 @@ avg_data = foreach group_data generate (data.CountryName, data.IndicatorName, da
 
 
 
-
-
