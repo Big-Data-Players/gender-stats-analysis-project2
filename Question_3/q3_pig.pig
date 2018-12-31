@@ -5,13 +5,13 @@ y2007:double,y2008:double,y2009:double,y2010:double,y2011:double,
 y2012:double,y2013:double,y2014:double,y2015:double,y2016:double);
 
 
-REGISTER '/home/cloudera/workspace/BDPquestion3/target/Question3UDF-0.0.1-SNAPSHOT.jar'
+REGISTER '/home/cloudera/Desktop/UserDefineFunction-0.0.1-SNAPSHOT.jar'
 
 userFunction = FOREACH Q3_data GENERATE CountryName,
 com.BDP.Question3UDF($2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17);
 filter_udf = FILTER userFunction BY SIZE($1)!=0;
 
-dump userFunction;
+dump filter_udf;
 
 ---------- JAVA ----------
 

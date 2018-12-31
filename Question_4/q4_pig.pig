@@ -5,12 +5,14 @@ y2002:double,y2003:double,y2004:double,y2005:double,y2006:double,
 y2007:double,y2008:double,y2009:double,y2010:double,y2011:double,
 y2012:double,y2013:double,y2014:double,y2015:double,y2016:double);
 
-REGISTER '/home/cloudera/workspace/UDF/target/UserDefineFunction-0.0.1-SNAPSHOT.jar'
+REGISTER '/home/cloudera/Desktop/Question3UDF-0.0.1-SNAPSHOT.jar'
 
 udf = FOREACH question4_data GENERATE CountryName,
 com.revature.UserDefineFunction($2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17);
 
-filter_udf = FILTER udf BY SIZE($1)!=0;
+filter_udf_4 = FILTER udf BY SIZE($1)!=0;
+
+dump filter_udf_4;
 
 ----JAVA----
 
