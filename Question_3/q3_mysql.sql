@@ -31,7 +31,7 @@ DELIMITER ;
 
 CALL PROJECT2.MALE_EMPLOYMENT_TRANSPOSED(2010,2016);
 
--- VIEWS for Hive and Pig (respectively)
+
 
 CREATE VIEW Q3_MALE_EMP AS
 SELECT CountryName, IndicatorCode, YearsByCountry, Data

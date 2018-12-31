@@ -1,4 +1,3 @@
-
 sqoop export --connect jdbc:mysql://localhost/PROJECT2 --username GENDER_ADMIN --password p4ssw0rd 
 --table Q3_MALE_EMP --export-dir Hdata/GenderData -m 1 --enclosed-by '\"';
 
