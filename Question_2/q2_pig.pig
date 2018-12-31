@@ -10,7 +10,7 @@ y2012: float,y2013: float,y2014: float,y2015: float,y2016: float);
 
 REGISTER '/home/cloudera/workspace/UDFPig/target/UDFPig-0.0.1-SNAPSHOT.jar'
 
-final_answer = FOREACH data generate com.rikenm.main.UdfPig($45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60);
+final_answer = FOREACH data generate com.rikenm.main.UdfPig($44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60);
 
 dump final_answer;
 
