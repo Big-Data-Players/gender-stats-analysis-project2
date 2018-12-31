@@ -19,12 +19,9 @@ IndicatorName varchar(500),IndicatorCode varchar(30),`1960` varchar(100),
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|';
 
-
-
 LOAD DATA INPATH 'sqoop-question-2/part-m-00000' INTO TABLE Q2_DATA;
 
-
-add jar /home/cloudera/workspace/UDFHive/target/UDFHive-0.0.1-SNAPSHOT.jar
+add jar /home/cloudera/workspace/UDFHive/target/UDFHive-0.0.1-SNAPSHOT.jar;
 
 create temporary function myaverage as 'com.rikenm.main.UdfAverage';
 
@@ -39,9 +36,7 @@ import java.util.List;
 import org.apache.hadoop.hive.ql.exec.UDF;
 import org.apache.hadoop.io.Text;
 
-
 //Description of the UDF
-
 
 public class UdfAverage extends UDF {
 	
@@ -51,7 +46,6 @@ public class UdfAverage extends UDF {
 		if(strList.length < 2){ 
 			
 			return 0.0F;
-			
 		}else{
 			
 			int innerCount = 0;
@@ -60,62 +54,30 @@ public class UdfAverage extends UDF {
 		    List<Float> floatArray = new ArrayList<Float>();
 		    float finalAnswer = 0.0F;
 			
-			
 			for (int i = 0 ; i < strList.length; i++) {
-				
 				String value = strList[i];
-			
 				if(!value.equals("")){
-				    
-					
 					if(innerCount >= 1){
-
 						floatArray.add((Float.parseFloat(value) - previous)/outerCount);
-						
 					}
 					previous = Float.parseFloat(value);
-					
 					outerCount = 1;
 					innerCount++;
-					
 				}else{
-					
 					outerCount++;
-					
 				}
-				
 			}
 			// do average 
 			if(floatArray.size() < 2){
 				return 0.0F;
 			}
-			
-			
 			for(float f: floatArray){
 				finalAnswer += f;
-				
 			}
-			
-			
-			
-			
-			
-			
-
-			
 			return finalAnswer/floatArray.size();
 		}
-		
-		
 	}
-	
-	
-	
 }
-
-
-
-
 
 --------  end of UDF
 

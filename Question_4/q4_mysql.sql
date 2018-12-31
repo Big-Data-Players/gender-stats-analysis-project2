@@ -33,6 +33,8 @@ DELIMITER ;
 
 CALL GENDER_STAT_DB.TRANSPOSE_Q4(2000,2016);
 
+--Created view--
+
 CREATE VIEW question_4_hive AS
 SELECT CountryName, IndicatorCode, YearsByCountry, Data
 FROM TRANSPOSE_DATA_Q4
