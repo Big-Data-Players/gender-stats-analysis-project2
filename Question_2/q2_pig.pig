@@ -13,3 +13,153 @@ REGISTER '/home/cloudera/workspace/UDFPig/target/UDFPig-0.0.1-SNAPSHOT.jar'
 final_answer = FOREACH data generate com.rikenm.main.UdfPig($45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$60);
 
 dump final_answer;
+
+
+
+-------------------UDF----------------
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.hadoop.io.Text;
+import org.apache.pig.EvalFunc;
+import org.apache.pig.data.Tuple;
+
+
+public class UdfPig extends EvalFunc<String> {
+	
+	private Text result = new Text();
+	
+	
+
+	@Override
+	public String exec(Tuple strList) throws IOException {
+		// TODO Auto-generated method stub
+		
+		/*List<String> myList = new ArrayList<>();
+		
+		for (int i = 0 ; i < strList.size(); i++) {
+			
+			if(strList.get != null){
+				Object str = strList.get(i);
+			}
+			
+		}
+		*/
+		
+		
+		if(strList.size() < 2){ 
+			
+			return "0.0";
+			
+		}else{
+			
+			int innerCount = 0;
+			float previous = 0.0F;
+			int outerCount = 0;
+		    List<Float> floatArray = new ArrayList<Float>();
+		    float finalAnswer = 0.0F;
+			
+			
+			for (int i = 0 ; i < strList.size(); i++) {
+				
+				
+			
+				if(strList.get(i) != null){
+					Float value = (Float) strList.get(i);
+					
+					if(innerCount >= 1){
+
+						try{floatArray.add(((value) - previous)/outerCount);}
+						catch(Exception e){
+							System.out.println("---The value that cause the error is-- :  "+value);
+						}
+						
+					}
+					
+					try{previous = value;}
+					catch(Exception e){
+						System.out.println("---The value that cause the error is 1st-- :  "+value);
+					}
+					
+					outerCount = 1;
+					innerCount++;
+					
+				}else{
+					
+					outerCount++;
+					
+				}
+				
+			}
+			// do average 
+			if(floatArray.size() < 2){
+				return "0.0";
+			}
+			
+			
+			for(float f: floatArray){
+				finalAnswer += f;
+				
+			}
+			
+			
+			
+			
+			
+			
+
+			
+			return Float.toString(finalAnswer/floatArray.size());
+		} 
+		
+	} 
+	
+	
+	
+}
+
+
+
+
+
+
+-------------
+
+-------------Pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.rikenm</groupId>
+  <artifactId>UDFPig</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hadoop.version>0.20.2</hadoop.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   	 	<maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
+   <dependencies> 
+	
+      <dependency>            
+         <groupId>org.apache.pig</groupId>            
+         <artifactId>pig</artifactId>            
+         <version>0.15.0</version> 
+             
+      </dependency> 
+		
+      <dependency>        
+         <groupId>org.apache.hadoop</groupId>            
+         <artifactId>hadoop-core</artifactId>            
+         <version>0.20.2</version>     
+      </dependency> 
+      
+   </dependencies>  
+  
+</project>
+
+
+---------
