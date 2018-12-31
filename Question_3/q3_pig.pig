@@ -1,4 +1,4 @@
-Q3_data = LOAD 'Male_Employment/part-m-00000' USING PigStorage('|') AS 
+Q3_data = LOAD 'Q3_MALE_EMP/part-m-00000' USING PigStorage('|') AS 
 (CountryName:chararray, IndicatorCode:chararray, y2000:double, y2001:double,
 y2002:double,y2003:double,y2004:double,y2005:double,y2006:double,
 y2007:double,y2008:double,y2009:double,y2010:double,y2011:double,
