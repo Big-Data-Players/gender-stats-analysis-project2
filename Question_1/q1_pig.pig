@@ -16,5 +16,6 @@ filter_remove = FILTER avg_data BY average != 0.0;
 
 final_answer = FILTER filter_remove BY average<30; 
 
+
 USING org.apache.pig.backend.hadoop.hbase.HBaseStorage('info:countryName info:average');
 

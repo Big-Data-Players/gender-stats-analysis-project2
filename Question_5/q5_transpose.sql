@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 --!!!!!!!!!!!!!!!!!!!!DO NOT TOUCH!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -12,7 +11,7 @@ CREATE TABLE transpose_data(CountryName varchar(50), IndicatorName varchar(250),
 YearsByCountry INTEGER, Data FLOAT );
 
 DELIMITER $$
-CREATE PROCEDURE gender_stat_db.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
+CREATE PROCEDURE PROJECT2.TRANSPOSE(MIN_VALUE INTEGER, MAX_VALUE INTEGER)
 BEGIN
 
 DECLARE YEAR INTEGER;
@@ -24,9 +23,9 @@ DO
 
 SET @COLNAME = CONCAT('`',YEAR,'`');
 SET @STATEMENT = CONCAT(
-    'INSERT INTO gender_stat_db.transpose_data (CountryName, IndicatorName, YearsByCountry, Data)',
+    'INSERT INTO PROJECT2.transpose_data (CountryName, IndicatorName, YearsByCountry, Data)',
     ' SELECT CountryName, IndicatorName, ', YEAR,',', @COLNAME,
-    ' FROM gender_stat_db.gender_data',
+    ' FROM PROJECT2.gender_data2',
     ' WHERE ', @COLNAME,
     ' IS NOT NULL'
 );
@@ -40,4 +39,4 @@ END WHILE;
 END$$
 DELIMITER ;
 
-CALL gender_stat_db.TRANSPOSE(2010,2016);
+CALL PROJECT2.TRANSPOSE(2010,2016);
