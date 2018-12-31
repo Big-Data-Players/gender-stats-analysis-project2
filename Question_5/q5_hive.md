@@ -18,9 +18,11 @@ FROM q5data
 Group BY CountryName;
 
 # Convert hive table to .csv
-hive -e 'select * from genderdb.q5data' | sed 's/[\t]/,/g' > LData/Project2/q5_hive_data.csv
+hive -e 'select * from genderdb.q5data' | sed 's/[\t]/,/g' LData/Project2/q5_hive_data.csv
 
-hive -e 'select * from genderdb.q5_avg' | sed 's/[\t]/,/g' > LData/Project2/q5_hive_avg.csv
+# Averaged .csv (Final)
+hive -e 'select * from genderdb.q5_avg' | sed 's/[\t]/,/g' 
+LData/Project2/q5_hive_avg.csv
 
 # Move to shared folder
 sudo cp LData/Project2/q5_hive_data.csv /media/sf_vbshared/ 

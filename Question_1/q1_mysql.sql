@@ -48,7 +48,9 @@ CALL PROJECT2.TRANSPOSE_Q1(2010,2016);
 
 -- VIEWS for Hive and Pig (respectively)
 
+-- hive
 CREATE VIEW question_1_hive AS
 SELECT CountryName, IndicatorCode, YearsByCountry, Data
 FROM transpose_data_q1
 WHERE IndicatorCode = 'SE.TER.CMPL.FE.ZS';
+
