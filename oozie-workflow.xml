@@ -1,0 +1,65 @@
+<workflow-app name="oozie-lab" xmlns="uri:oozie:workflow:0.4">
+    <!-- Start job control node -->
+    <start to="hive-create" /
+    
+     
+    <!-- Hive table creation -->
+    <action name="hive-create">
+        <hive xmlns="uri:oozie:hive-action:0.4">
+            <job-tracker>${job_tracker}</job-tracker>
+            <name-node>${name_node}</name-node>
+            <configuration>
+                <property>
+                    <name>hive.metastore.uris</name>
+                    <value>thrift://localhost:9083</value>
+                </property>
+            </configuration>
+            <script>${scripts_location}/createTableQ1.sql</script>
+        </hive>
+        <ok to="hive-load" />
+        <error to="kill" />
+    </action>
+
+    
+
+    <!-- Hive table load -->
+    <action name="hive-load">
+        <hive xmlns="uri:oozie:hive-action:0.4">
+            <job-tracker>${job_tracker}</job-tracker>
+            <name-node>${name_node}</name-node>
+            <script>${scripts_location}/loadQ1.sql</script>
+        </hive>
+        <ok to="hive-query" />
+        <error to="kill" />
+    </action>
+
+    <!-- Hive table query -->
+    <action name="hive-query">
+        <hive xmlns="uri:oozie:hive-action:0.4">
+            <job-tracker>${job_tracker}</job-tracker>
+            <name-node>${name_node}</name-node>
+            <script>${scripts_location}/question1Output1.sql</script>
+        </hive>
+        <ok to="hive-final" />
+        <error to="kill" />
+    </action>
+
+    <!-- Hive table final output -->
+    <action name="hive-final">
+        <hive xmlns="uri:oozie:hive-action:0.4">
+            <job-tracker>${job_tracker}</job-tracker>
+            <name-node>${name_node}</name-node>
+            <script>${scripts_location}/question1FinalOutput.sql</script>
+        </hive>
+        <ok to="end" />
+        <error to="kill" />
+    </action>
+
+    <!-- Kill job control node -->
+    <kill name="kill">
+        <message>Oozie job terminated with errors.</message>
+    </kill>
+
+    <!-- End job control node -->
+    <end name="end" />
+</workflow-app>

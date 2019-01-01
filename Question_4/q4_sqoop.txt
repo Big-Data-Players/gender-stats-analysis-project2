@@ -1,0 +1,10 @@
+
+----------------HIVE-----------------
+sqoop import --connect jdbc:mysql://localhost/GENDER_STAT_DB --username root 
+--password cloudera --table question_4_hive --fields-terminated-by '|' 
+--target-dir sqoop-question-4 -m 1;
+
+----------------PIG-----------------
+sqoop import --connect jdbc:mysql://localhost/GENDER_STAT_DB --username root 
+--password cloudera --table q4pig --fields-terminated-by '|' 
+--target-dir sqoop-question-4p -m 1;
